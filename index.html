@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mattias Amo Fermin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        nav {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #1a1a1a;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .section p {
+            color: #444;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        .card .date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .card a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .contact-item strong {
+            min-width: 100px;
+            color: #666;
+        }
+
+        .contact-item a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home'); return false;">Your Name</a>
+            <ul>
+                <li><a href="#" class="active" onclick="showPage('home'); return false;">Home</a></li>
+                <li><a href="#" onclick="showPage('writing'); return false;">Writing</a></li>
+                <li><a href="#" onclick="showPage('projects'); return false;">Projects</a></li>
+                <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+                <li><a href="#" onclick="showPage('contact'); return false;">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Your Name</h1>
+            <p>Brief intro about yourself and what you do. Keep it simple and direct.</p>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Recent Work</h2>
+                <div class="grid">
+                    <div class="card">
+                        <div class="date">October 2024</div>
+                        <h3>Article Title Here</h3>
+                        <p>Short description of what this piece is about and why it matters.</p>
+                        <a href="#">Read more →</a>
+                    </div>
+                    <div class="card">
+                        <div class="date">September 2024</div>
+                        <h3>Another Article Title</h3>
+                        <p>Brief summary that makes people want to click and read the full thing.</p>
+                        <a href="#">Read more →</a>
+                    </div>
+                    <div class="card">
+                        <div class="date">August 2024</div>
+                        <h3>Third Article Title</h3>
+                        <p>A couple sentences explaining what this is and what you learned.</p>
+                        <a href="#">Read more →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>What I'm Working On</h2>
+                <p>A paragraph or two about current projects, research, or things you're learning. This section shows you're actively doing stuff, not just listing old work.</p>
+                <p>You can mention specific goals, what you're reading, experiments you're running, or skills you're developing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WRITING PAGE -->
+    <div id="writing" class="page">
+        <div class="container">
+            <div class="section">
+                <h2>Writing</h2>
+                <p>Collection of essays, research pieces, and articles on various topics.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="date">October 2024</div>
+                    <h3>First Article Title</h3>
+                    <p>Description of what this article covers and the main points you explore.</p>
+                    <a href="#">Read full article →</a>
+                </div>
+                <div class="card">
+                    <div class="date">September 2024</div>
+                    <h3>Second Article Title</h3>
+                    <p>Brief overview of the topic and what readers will learn from it.</p>
+                    <a href="#">Read full article →</a>
+                </div>
+                <div class="card">
+                    <div class="date">August 2024</div>
+                    <h3>Third Article Title</h3>
+                    <p>Summary of the key ideas and why this piece is worth reading.</p>
+                    <a href="#">Read full article →</a>
+                </div>
+                <div class="card">
+                    <div class="date">July 2024</div>
+                    <h3>Fourth Article Title</h3>
+                    <p>Quick description to give context about what this explores.</p>
+                    <a href="#">Read full article →</a>
+                </div>
+                <div class="card">
+                    <div class="date">June 2024</div>
+                    <h3>Fifth Article Title</h3>
+                    <p>A few sentences about the main argument or research presented.</p>
+                    <a href="#">Read full article →</a>
+                </div>
+                <div class="card">
+                    <div class="date">May 2024</div>
+                    <h3>Sixth Article Title</h3>
+                    <p>Brief explanation of what makes this piece interesting or valuable.</p>
+                    <a href="#">Read full article →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECTS PAGE -->
+    <div id="projects" class="page">
+        <div class="container">
+            <div class="section">
+                <h2>Projects</h2>
+                <p>Things I've built, research I've conducted, and experiments I've run.</p>
+            </div>
+
+            <div class="section">
+                <h3>Project Name 1</h3>
+                <p>Detailed description of what this project was, what you learned, and what the results were. Include technical details, challenges you faced, and outcomes.</p>
+                <p>You can add links to code, papers, presentations, or other relevant materials here.</p>
+            </div>
+
+            <div class="section">
+                <h3>Project Name 2</h3>
+                <p>Another project with full details about scope, methodology, and findings. Make it clear what your role was and what skills you used.</p>
+                <p>Include metrics or results when possible to show impact.</p>
+            </div>
+
+            <div class="section">
+                <h3>Project Name 3</h3>
+                <p>Description of this work including context, approach, and takeaways. Focus on what makes this interesting or unique.</p>
+                <p>Don't be afraid to mention things that didn't work - it shows critical thinking.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="section">
+                <h2>About Me</h2>
+                <p>A few paragraphs about who you are, what you're interested in, and what drives you. Be genuine here - this is where personality comes through.</p>
+                <p>Talk about your background, what you're studying or working on, and what you want to do in the future. Include specific interests and areas of expertise.</p>
+                <p>You can mention books you're reading, communities you're part of, or problems you're trying to solve. Make it personal but professional.</p>
+            </div>
+
+            <div class="two-col">
+                <div class="section">
+                    <h3>Education</h3>
+                    <p><strong>School Name</strong><br>Degree/Program<br>Year - Present</p>
+                    <p><strong>Previous School</strong><br>What you studied<br>Year - Year</p>
+                </div>
+
+                <div class="section">
+                    <h3>Skills & Interests</h3>
+                    <ul class="skills-list">
+                        <li>Skill or area of expertise 1</li>
+                        <li>Skill or area of expertise 2</li>
+                        <li>Skill or area of expertise 3</li>
+                        <li>Skill or area of expertise 4</li>
+                        <li>Skill or area of expertise 5</li>
+                        <li>Skill or area of expertise 6</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="section">
+                <h2>Get In Touch</h2>
+                <p>Interested in collaborating, have questions about my work, or just want to chat? Feel free to reach out through any of these channels.</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>LinkedIn</strong>
+                        <a href="#">linkedin.com/in/yourprofile</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Twitter</strong>
+                        <a href="#">@yourhandle</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>GitHub</strong>
+                        <a href="#">github.com/yourusername</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Current Status</h3>
+                <p>Let people know what you're up to right now - looking for internships, open to collaboration, available for freelance, etc. This helps set expectations for anyone reaching out.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Your Name</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            const links = document.querySelectorAll('nav a');
+            
+            pages.forEach(p => p.classList.remove('active'));
+            links.forEach(l => l.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            event.target.classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
