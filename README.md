@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="INSERTBANNERHEREINASECOND" alt="Mattias Amo Fermin" width="100%">
+  <img src="https://raw.githubusercontent.com/mattiasamofermin/mattiasamofermin/refs/heads/main/mattiasbanner.jpg" alt="Mattias Amo Fermin" width="100%">
 </p>
 
 ### about
